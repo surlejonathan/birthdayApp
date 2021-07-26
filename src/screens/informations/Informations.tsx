@@ -1,36 +1,35 @@
 import React, {FC, useState, useRef} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Platform, Keyboard, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import {DateTime} from 'luxon';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
 import {styles} from './InformationsStyles';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 interface Props {}
-
+//value={new DateTime(birthday).toFormat('dd/LL/yyyy')}
 const Informations: FC = (props: Props) => {
   const [lastName, setLastName] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string | null>(null);
-  const [birthday, setBirthday] = useState<DateTime | null>(DateTime.now());
+  const [birthday, setBirthday] = useState<Date | null>(new Date());
   const lastNameRef = useRef(null);
   const firstNameRef = useRef(null);
   const birthdayRef = useRef(null);
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const inputDate: string = DateTime.fromISO(birthday.toISOString()).toFormat(
+    'dd/LL/yyyy',
+  );
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+  const [show, setShow] = useState<boolean>(false);
+
+  const onChange = (event: any, selectedDate: Date) => {
+    const currentDate: Date = selectedDate || birthday;
+    setShow(Platform.OS === 'ios');
+    setBirthday(currentDate);
+
+    birthdayRef.current.blur();
   };
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = date => {
-    console.warn('A date has been picked: ', date);
-    hideDatePicker();
-  };
-
+  console.log(birthday);
   return (
     <View style={styles.container}>
       <View style={styles.form}>
@@ -63,18 +62,25 @@ const Informations: FC = (props: Props) => {
           label="Date de naissance"
           inputStyle={styles.input}
           placeholder="JJ-MM-AAAA"
-          value={birthday.toFormat('dd/LL/yyyy')}
+          onKeyPress={() => setShow(true)}
+          onFocus={() => {
+            setShow(true);
+            Keyboard.dismiss();
+          }}
+          value={birthday && inputDate}
         />
       </View>
-      <TouchableOpacity onPress={showDatePicker}>
-        <Text>DatePicker</Text>
-      </TouchableOpacity>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
+
+      {show && (
+        <DateTimePicker
+          locale="fr-FR"
+          testID="dateTimePicker"
+          value={birthday}
+          display="default"
+          onChange={onChange}
+          onTouchCancel={() => setShow(false)}
+        />
+      )}
     </View>
   );
 };
