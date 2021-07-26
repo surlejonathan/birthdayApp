@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+
+import {styles} from './InformationsStyles';
 
 interface Props {}
 
@@ -12,11 +14,3 @@ const Informations: FC = (props: Props) => {
 };
 
 export default Informations;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

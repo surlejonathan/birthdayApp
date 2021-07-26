@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
+import {styles} from './HomeStyles';
 import {RootStackParamList} from '../../navigation/RootStack';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Accueil'>;
@@ -22,11 +23,3 @@ const Home: FC<Props> = ({navigation}) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
