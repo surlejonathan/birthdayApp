@@ -17,6 +17,8 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@types/react-native": "^0.64.12",
     "@types/react-redux": "^7.1.18",
+    "jsc-android": "^250230.2.1",
+    "luxon": "^2.0.1",
     "react": "17.0.1",
     "react-native": "0.64.2",
     "react-native-elements": "^3.4.2",
