@@ -14,6 +14,7 @@ import {
   StyleSheet,
   useColorScheme,
 } from 'react-native';
+import Home from './screens/home/Home';
 
 const App: FC = () => {
   const isDarkMode = useColorScheme() === 'light';
