@@ -1,5 +1,5 @@
 import React, {FC, useState, useRef} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import {DateTime} from 'luxon';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -15,6 +15,21 @@ const Informations: FC = (props: Props) => {
   const lastNameRef = useRef(null);
   const firstNameRef = useRef(null);
   const birthdayRef = useRef(null);
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = date => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
+  };
 
   return (
     <View style={styles.container}>
@@ -48,9 +63,18 @@ const Informations: FC = (props: Props) => {
           label="Date de naissance"
           inputStyle={styles.input}
           placeholder="JJ-MM-AAAA"
-          value={birthday.toLocaleString()}
+          value={birthday.toFormat('dd/LL/yyyy')}
         />
       </View>
+      <TouchableOpacity onPress={showDatePicker}>
+        <Text>DatePicker</Text>
+      </TouchableOpacity>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
     </View>
   );
 };
