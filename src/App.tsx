@@ -13,6 +13,7 @@ import {
   StyleSheet,
   useColorScheme,
 } from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import RootStack from './navigation/RootStack';
 
@@ -20,7 +21,7 @@ const App: FC = () => {
   const isDarkMode = useColorScheme() === 'light';
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaProvider style={styles.backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor="black"
@@ -28,7 +29,7 @@ const App: FC = () => {
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
