@@ -7,14 +7,13 @@
  */
 
 import React, {FC} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {Provider} from 'react-redux';
+
+import {PersistGate} from 'redux-persist/integration/react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
+import store, {persistor} from './redux/store';
 import RootStack from './navigation/RootStack';
 
 const App: FC = () => {
@@ -26,9 +25,13 @@ const App: FC = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor="black"
       />
-      <NavigationContainer>
-        <RootStack />
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     </SafeAreaProvider>
   );
 };
