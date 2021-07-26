@@ -1,16 +1,26 @@
 import React, {FC, useState, useRef} from 'react';
-import {Platform, Keyboard, View} from 'react-native';
+import {Platform, Keyboard, View, Alert} from 'react-native';
 import {Input} from 'react-native-elements';
 import {DateTime} from 'luxon';
-import {styles} from './InformationsStyles';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useSelector, useDispatch} from 'react-redux';
+
+import {userSelector, postUser} from '../../redux/userSlice';
+
+import {styles} from './InformationsStyles';
 
 interface Props {}
-//value={new DateTime(birthday).toFormat('dd/LL/yyyy')}
+
 const Informations: FC = (props: Props) => {
-  const [lastName, setLastName] = useState<string | null>(null);
-  const [firstName, setFirstName] = useState<string | null>(null);
-  const [birthday, setBirthday] = useState<Date | null>(new Date());
+  const {user} = useSelector(userSelector);
+
+  const dispatch = useDispatch();
+
+  const [lastName, setLastName] = useState<string | null>(user.lastname);
+  const [firstName, setFirstName] = useState<string | null>(user.firstname);
+  const [birthday, setBirthday] = useState<Date | null>(
+    user.birthday ? new Date(user.birthday) : new Date(),
+  );
   const lastNameRef = useRef(null);
   const firstNameRef = useRef(null);
   const birthdayRef = useRef(null);
@@ -25,11 +35,23 @@ const Informations: FC = (props: Props) => {
     const currentDate: Date = selectedDate || birthday;
     setShow(Platform.OS === 'ios');
     setBirthday(currentDate);
+    if (selectedDate) {
+      dispatch(
+        postUser({
+          lastname: lastName,
+          firstname: firstName,
+          birthday: DateTime.fromISO(currentDate.toISOString()),
+        }),
+      );
+      Alert.alert(
+        'Données transmises',
+        'Les informations saisies ont bien été enregistrées.',
+      );
+    }
 
     birthdayRef.current.blur();
   };
 
-  console.log(birthday);
   return (
     <View style={styles.container}>
       <View style={styles.form}>
