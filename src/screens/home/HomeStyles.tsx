@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native';
+import {colors, fonts, spaces} from '../../utils/commonStyles';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: spaces.lg,
+    backgroundColor: colors.primary,
   },
 
   loader: {
@@ -17,30 +19,35 @@ export const styles = StyleSheet.create({
   },
 
   linkLabel: {
-    fontWeight: 'bold',
+    fontFamily: fonts.bold,
   },
 
   info: {
-    color: 'black',
-    fontWeight: 'bold',
+    color: colors.white,
+    fontFamily: fonts.boldItalic,
   },
 
   text: {
-    fontSize: 32,
+    fontFamily: fonts.normal,
+    fontSize: fonts.xl,
+    color: colors.dark,
+    marginVertical: spaces.sm,
   },
 
   tipContainer: {
-    marginTop: 16,
+    marginTop: spaces.lg,
   },
 
   tipText: {
-    fontSize: 12,
+    fontFamily: fonts.normal,
+    fontSize: fonts.md,
+    color: colors.dark,
   },
 
   wish: {
-    fontSize: 48,
+    fontSize: fonts.xxl,
     textDecorationLine: 'underline',
     textDecorationStyle: 'solid',
-    textDecorationColor: 'black',
+    textDecorationColor: colors.white,
   },
 });

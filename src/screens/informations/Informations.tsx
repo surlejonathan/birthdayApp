@@ -9,9 +9,7 @@ import {userSelector, postUser} from '../../redux/userSlice';
 
 import {styles} from './InformationsStyles';
 
-interface Props {}
-
-const Informations: FC = (props: Props) => {
+const Informations: FC = () => {
   const {user} = useSelector(userSelector);
 
   const dispatch = useDispatch();

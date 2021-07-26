@@ -6,7 +6,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 import {RootStackParamList} from '../../navigation/RootStack';
 import {fetchUser, userSelector} from '../../redux/userSlice';
-
+import {colors} from '../../utils/commonStyles';
 import {styles} from './HomeStyles';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Accueil'>;
@@ -52,7 +52,7 @@ const Home: FC<Props> = ({navigation}) => {
   if (loading) {
     return (
       <View style={styles.loader}>
-        <ActivityIndicator size={60} color="blue" />
+        <ActivityIndicator size={60} color={colors.primary} />
       </View>
     );
   } else if (error) {

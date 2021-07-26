@@ -1,20 +1,23 @@
 import {StyleSheet} from 'react-native';
+import {colors, fonts, spaces} from '../../utils/commonStyles';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 12,
-    paddingVertical: 16,
+    paddingHorizontal: spaces.md,
+    paddingVertical: spaces.xl,
+    backgroundColor: colors.primary,
     flex: 1,
   },
 
   form: {
-    paddingHorizontal: 10,
-    paddingTop: 12,
+    backgroundColor: colors.white,
+    paddingHorizontal: spaces.sm,
+    paddingTop: spaces.md,
     borderRadius: 8,
-    borderWidth: 1,
   },
 
   input: {
-    color: 'black',
+    fontFamily: fonts.bold,
+    color: colors.dark,
   },
 });

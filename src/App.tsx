@@ -15,6 +15,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import store, {persistor} from './redux/store';
 import RootStack from './navigation/RootStack';
+import {colors} from './utils/commonStyles';
 
 const App: FC = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -23,7 +24,7 @@ const App: FC = () => {
     <SafeAreaProvider style={styles.backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor="black"
+        backgroundColor={colors.dark}
       />
       <Provider store={store}>
         <PersistGate persistor={persistor}>
