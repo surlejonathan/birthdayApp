@@ -29,4 +29,7 @@ export const fonts = {
   lg: 24,
   xl: 36,
   xxl: 48,
+  normal: 'PlayfairDisplay-Regular',
+  bold: 'PlayfairDisplay-Bold',
+  boldItalic: 'PlayfairDisplay-BoldItalic',
 };
