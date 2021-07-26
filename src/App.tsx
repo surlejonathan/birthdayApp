@@ -7,14 +7,14 @@
  */
 
 import React, {FC} from 'react';
-
 import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
   useColorScheme,
 } from 'react-native';
-import Home from './screens/home/Home';
+import {NavigationContainer} from '@react-navigation/native';
+import RootStack from './navigation/RootStack';
 
 const App: FC = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -25,6 +25,9 @@ const App: FC = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor="black"
       />
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
